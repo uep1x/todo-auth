@@ -28,6 +28,10 @@ def create_user(db: Session, user: UsersORM, type_fix: str = "commit"):
     else:
         print("FATAL ERROR IN WRITING DB")
 # update filed user
-def add_new_access_cookie(db: Session, user: UsersORM, new_access_cookie: str):
+def add_new_access_cookie_in_user(db: Session, user: UsersORM, new_access_cookie: str):
     db.execute(update(UsersORM).where(UsersORM.uid == user.uid).values(access_cookies=func.array_append(UsersORM.access_cookies, new_access_cookie)))
+    db.commit()
+# delete field user
+def delete_access_cookie_in_user(db: Session, user: UsersORM, old_access_cookie: str):
+    db.execute(update(UsersORM).where(UsersORM.uid == user.uid).values(access_cookies=func.array_remove(UsersORM.access_cookies, old_access_cookie)))
     db.commit()

@@ -17,6 +17,9 @@ class SignUpSchema(BM):
 class LogInSchema(BM):
     nickname: str
     password: str
+# LogOut
+class LogOutSchema(BM):
+    access_cookie: str
 # item schemas
 # Item ToDo's schema
 class ItemsSchema(BM):
